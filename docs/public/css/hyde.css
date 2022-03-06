@@ -232,12 +232,13 @@ a.sidebar-nav-item:focus {
 }
 
 /* Magenta */
-.theme-base-0e .sidebar {
-  background-color: #aa759f;
+.theme-base-0e .sidebar,
+.theme-base-0e .content {
+  background-color: pink;
 }
 .theme-base-0e .content a,
 .theme-base-0e .related-posts li a:hover {
-  color: #aa759f;
+  color: red;
 }
 
 /* Brown */
