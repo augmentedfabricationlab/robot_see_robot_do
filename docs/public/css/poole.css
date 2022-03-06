@@ -45,7 +45,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  color: #bf616a;
 }
 
 html {
@@ -61,7 +60,7 @@ html {
 
 body {
   color: #515151;
-  background-color: #fff;
+  background-color: pink;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
