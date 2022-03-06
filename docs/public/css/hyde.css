@@ -248,6 +248,10 @@ a.sidebar-nav-item:focus {
   color: rgb(255 238 98);
   text-decoration: line-through;
 }
+.theme-base-0e .related-posts li a:active{
+  color: rgb(255 238 98);
+  text-decoration: line-through;
+}
 
 /* Brown */
 .theme-base-0f .sidebar {
