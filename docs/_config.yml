@@ -7,8 +7,8 @@ permalink:        pretty
 #relative_permalinks: true
 
 # Setup
-title:            Human See Human Do Robot See Robot Do
-tagline:          'Human See Human Do Robot See Robot Do'
+title:            Robot See Robot Do
+tagline:          'Robot See Robot Do'
 description:      'MRAC WORKSHOP'
 baseurl: "/robot_see_robot_do/" # the subpath of your site, e.g. /blog
 url: "https://le-ar-n.github.io/robot_see_robot_do/" # the base hostname & protocol for your site, e.g. http://example.com
