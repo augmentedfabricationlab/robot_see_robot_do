@@ -230,15 +230,13 @@ a.sidebar-nav-item:focus {
 }
 
 /* Magenta */
-.theme-base-0e .content a,
-.theme-base-0e .related-posts li a:hover,
-.theme-base-0e a{
+.theme-base-0e .content a{
   color: white;
   text-decoration: none;
 }
-.theme-base-0e a:hover{
+.theme-base-0e .related-posts li a:hover{
   color: red;
-  text-decoration: none
+  text-decoration: none;
 }
 
 /* Brown */
