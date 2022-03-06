@@ -81,6 +81,11 @@ html {
   font-size: 2.25rem;
 }
 
+/* About section */
+.sidebar-about h1 a {
+  color: rgb(255, 208, 0);
+}
+
 /* Sidebar nav */
 .sidebar-nav {
   margin-bottom: 1rem;
