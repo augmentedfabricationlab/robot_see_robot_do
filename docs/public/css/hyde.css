@@ -238,7 +238,7 @@ a.sidebar-nav-item:focus {
 }
 .theme-base-0e .sidebar a:hover{
   color: rgb(255, 208, 0);
-  text-decoration: none;
+  text-decoration: line-through;
 }
 .theme-base-0e .content a{
   color: rgb(255 238 98);
@@ -246,7 +246,7 @@ a.sidebar-nav-item:focus {
 }
 .theme-base-0e .related-posts li a:hover{
   color: rgb(255, 208, 0);
-  text-decoration: none;
+  text-decoration: line-through;
 }
 
 /* Brown */
