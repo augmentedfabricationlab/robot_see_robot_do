@@ -230,6 +230,14 @@ a.sidebar-nav-item:focus {
 }
 
 /* Magenta */
+.theme-base-0e .sidebar a{
+  color: white;
+  text-decoration: none;
+}
+.theme-base-0e .sidebar a:hover{
+  color: red;
+  text-decoration: none;
+}
 .theme-base-0e .content a{
   color: white;
   text-decoration: none;
