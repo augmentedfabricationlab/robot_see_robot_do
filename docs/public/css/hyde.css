@@ -232,13 +232,11 @@ a.sidebar-nav-item:focus {
 }
 
 /* Magenta */
-.theme-base-0e .sidebar,
-.theme-base-0e .content {
-  background-color: pink;
-}
 .theme-base-0e .content a,
-.theme-base-0e .related-posts li a:hover {
-  color: red;
+.theme-base-0e .related-posts li a:hover,
+.theme-base-0e a{
+  color: black;
+  text-decoration: underline;
 }
 
 /* Brown */
