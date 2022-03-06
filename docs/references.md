@@ -3,5 +3,5 @@ layout: page
 title: References
 ---
 
-# Collection of references
+### Collection of references
 
