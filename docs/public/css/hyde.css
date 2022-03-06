@@ -244,11 +244,16 @@ a.sidebar-nav-item:focus {
   color: rgb(255 238 98);
   text-decoration: line-through;
 }
+
 .theme-base-0e .content a{
   color: rgb(255 238 98);
   text-decoration: none;
 }
 .theme-base-0e .related-posts li a:hover{
+  color: rgb(255 238 98);
+  text-decoration: line-through;
+}
+.theme-base-0e .related-posts li a:active{
   color: rgb(255 238 98);
   text-decoration: line-through;
 }
