@@ -1,1 +1,29 @@
-theme: jekyll-theme-minimal
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+#relative_permalinks: true
+
+# Setup
+title:            L.E.A.R.N.
+tagline:          'L.E.A.R.N.'
+description:      'L.earning E.nvironment for A.rchitectural R.obotics for N.ewbies'
+baseurl: "/le-ar-n/" # the subpath of your site, e.g. /blog
+url: "https://le-ar-n.github.io/le-ar-n/" # the base hostname & protocol for your site, e.g. http://example.com
+
+paginate:         5
+
+# Custom vars
+#version:          2.1.0
+
+github:
+  repo:           https://github.com/le-ar-n/le-ar-n
+
+plugins:
+  - jekyll-feed
+
+collections:
+  sessions:
+    output: true
