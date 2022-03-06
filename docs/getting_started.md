@@ -57,10 +57,6 @@ C:\Users\YOUR_USERNAME\workspace
 
 Then open Github Desktop and clone the following repository into you workspace folder:
 
-* [L.E.A.R.N. repository](https://github.com/le-ar-n/le-ar-n)
+* [Robot See Robot Do repository](https://github.com/augmentedfabricationlab/robot_see_robot_do)
 
 **Voilà! You can now go to VS Code, Rhino or Grasshopper to run the example files!**
-
-### 5. Slides
-[How to run Python in Anaconda prompt, VS Code, Rhino & Grasshopper](https://docs.google.com/presentation/d/1TQNj92qhDZBSEtYajfmCCKaSDm2lwxsIdcFl3V1vE7Q/edit?usp=sharing)
-

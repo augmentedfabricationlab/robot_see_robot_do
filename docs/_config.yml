@@ -10,8 +10,8 @@ permalink:        pretty
 title:            L.E.A.R.N.
 tagline:          'L.E.A.R.N.'
 description:      'L.earning E.nvironment for A.rchitectural R.obotics for N.ewbies'
-baseurl: "/le-ar-n/" # the subpath of your site, e.g. /blog
-url: "https://le-ar-n.github.io/le-ar-n/" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "/robot_see_robot_do/" # the subpath of your site, e.g. /blog
+url: "https://le-ar-n.github.io/robot_see_robot_do/" # the base hostname & protocol for your site, e.g. http://example.com
 
 paginate:         5
 
@@ -19,7 +19,7 @@ paginate:         5
 #version:          2.1.0
 
 github:
-  repo:           https://github.com/le-ar-n/le-ar-n
+  repo:           https://github.com/augmentedfabricationlab/robot_see_robot_do
 
 plugins:
   - jekyll-feed
