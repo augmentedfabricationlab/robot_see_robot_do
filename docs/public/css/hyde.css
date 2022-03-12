@@ -185,6 +185,7 @@ figcaption {
 
 img.center{
   display: inline;
+  margin: 0;
 }
 
 img.rounded-corners {
