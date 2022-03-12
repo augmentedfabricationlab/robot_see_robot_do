@@ -27,5 +27,13 @@ title: Inspiration
   <figcaption>Fine handwork rattan connection. The fibre material is soaked before use, such that they are more appliable. When drying, the fibres shrink and the connection tightens.</figcaption>
 </figure>
 
+### Reciprocal Frame Structures
+
+<figure>
+  <img src="https://d2hpum9hu56in0.cloudfront.net/userimage/photo/image/13678/large_original_aspect_for_pc_4cd7d596-4dd3-498e-ab33-ad7fadcab6ae.JPG" alt="Macrame sculpture." style="width:560px" class="center">
+  <figcaption>The Rokko Shidare Observatory, a reciprocal frame structure, provides a place to experience the natural energy and beauty of the Rokko Mountain.</figcaption>
+</figure>
+
+
 
 
