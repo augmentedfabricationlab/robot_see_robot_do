@@ -23,8 +23,8 @@ title: Inspiration
 <figure>
 
 <figure>
-  <img src="https://bambus.rwth-aachen.de/eng/reports/connect/friction/pic/seilb2.jpeg" alt="Fine handwork rattan connection." style="width:560px" class="center">
-  <figcaption>Fine handwork rattan connection. Sual plait materials are rind strips of bamboo, rattan or lianas. Soaked before use they are more pliable. When drying, the fibres shrink and the connection tightens.</figcaption>
+  <img src="https://bambus.rwth-aachen.de/eng/reports/connect/friction/pic/seilb2.jpeg" alt="Fine handwork rattan connection." style="width:280px" class="center">
+  <figcaption>Fine handwork rattan connection. The fibre material is soaked before use, such that they are more appliable. When drying, the fibres shrink and the connection tightens.</figcaption>
 </figure>
 
 
