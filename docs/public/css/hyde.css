@@ -190,8 +190,10 @@ img.rounded-corners {
 
 img.drop-corners {
   border-radius: 0 50% 50% 50%;
+  text-align: left;
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
-
 
 
 
