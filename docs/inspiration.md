@@ -11,14 +11,14 @@ title: Inspiration
 </figure>
 
 <figure>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/P0cei5ihF1c?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 5px;"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/P0cei5ihF1c?start=9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 5px;"></iframe>
 <figcaption>Macrame pattern making</figcaption>
 </figure>
 
 ### Textile Joints
 
 <figure>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/4UXl5P9KYJE?controls=0&amp;start=28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 5px;"></iframe>
+<iframe wwidth="560" height="315" src="https://www.youtube.com/embed/4UXl5P9KYJE?start=28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 5px;"></iframe>
 <figcaption>The cross collar with rosette</figcaption>
 <figure>
 
