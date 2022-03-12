@@ -10,4 +10,6 @@ Digital fabrication technology has opened up the possibility to fabricate direct
   <img src="https://github.com/augmentedfabricationlab/robot_see_robot_do/blob/master/docs/_images/titelbild-rsrd.jpg" width="350" title="Teaming up with robots for collaboratively creating complex building structures">
 </p>
 
+![title_image](https://github.com/augmentedfabricationlab/robot_see_robot_do/blob/master/docs/_images/titelbild-rsrd.jpg "Teaming up with robots for collaboratively creating complex building structures")
+
 In particular, we explore the potentials of human-robot collaboration for the in-place assembly of complex building structures. By using a custom-made object-aware mobile AR interface, humans and robots share a digital-physical workspace, in which humans are informed by digital spatial data, and robots are informed vice versa by the information of tracked physical objects for cooperative assembly routines. The goal of the workshop is to negotiate the boundaries of task distribution and coordination between human and machine agents in reaching a common goal.
