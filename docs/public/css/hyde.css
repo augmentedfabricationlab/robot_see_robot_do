@@ -183,6 +183,10 @@ figcaption {
   margin-bottom: 3px;
 }
 
+img.center{
+  float: center;
+}
+
 img.rounded-corners {
   border-radius: 50%;
 }
