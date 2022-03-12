@@ -173,6 +173,7 @@ a.sidebar-nav-item:focus {
 
 figure {
   align-self: center;
+  align-content: center;
   padding: 0px;
   margin: auto;
 }
