@@ -11,7 +11,7 @@ Digital fabrication technology has opened up the possibility to fabricate direct
 </p>
 
 <figure>
-  <img src="{{site.baseurl}}images/titelbild-rsrd.jpg" title="Teaming up with robots for collaboratively creating complex building structures">
+  <img src="{{site.baseurl}}images/titelbild-rsrd.jpg" alt="title image" style="width:100%">
   <figcaption>Teaming up with robots for collaboratively creating complex building structures.</figcaption>
 </figure>
 
