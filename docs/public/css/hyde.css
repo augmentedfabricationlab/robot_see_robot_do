@@ -184,7 +184,7 @@ figcaption {
 }
 
 img.center{
-  float: center;
+  display: inline;
 }
 
 img.rounded-corners {
