@@ -172,16 +172,14 @@ a.sidebar-nav-item:focus {
  */
 
 figure {
-  border: 1px #cccccc solid;
-  padding: 4px;
+  align-self: center;
+  padding: 0px;
   margin: auto;
 }
 
 figcaption {
-  background-color: black;
-  color: white;
   font-style: italic;
-  padding: 2px;
+  padding: 1px;
   text-align: center;
 }
 
