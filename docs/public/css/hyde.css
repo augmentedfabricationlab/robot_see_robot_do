@@ -184,10 +184,9 @@ figcaption {
   margin-bottom: 3px;
 }
 
-figround {
+img.rounded-corners {
   border-radius: 50%;
 }
-
 
 
 /*
