@@ -10,6 +10,9 @@ title: References
   <figcaption>Macrame sculpture by artist Aurèlia Muñozs.</figcaption>
 </figure>
 
+<iframe src="https://youtu.be/P0cei5ihF1c" width="320" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<p><a href="https://youtu.be/P0cei5ihF1c">Macrame pattern</a></p>
+
 
 
 ### Textile Joints
