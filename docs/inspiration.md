@@ -6,7 +6,7 @@ title: Inspiration
 ### Macrame
 
 <figure>
-  <img src="https://media.revistaad.es/photos/60c7443471da6779ff45a12a/master/w_1600,c_limit/189039.jpg" alt="Teaming up with robots for collaboratively creating complex building structures." style="width:560px" class="center">
+  <img src="https://media.revistaad.es/photos/60c7443471da6779ff45a12a/master/w_1600,c_limit/189039.jpg" alt="Macrame sculpture." style="width:560px" class="center">
   <figcaption>Macrame sculpture by artist Aurèlia Muñozs.</figcaption>
 </figure>
 
@@ -16,5 +16,16 @@ title: Inspiration
 </figure>
 
 ### Textile Joints
+
+<figure>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4UXl5P9KYJE?controls=0&amp;start=28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 5px;"></iframe>
+<figcaption>The cross collar with rosette</figcaption>
+<figure>
+
+<figure>
+  <img src="https://bambus.rwth-aachen.de/eng/reports/connect/friction/pic/seilb2.jpeg" alt="Fine handwork rattan connection." style="width:560px" class="center">
+  <figcaption>Fine handwork rattan connection. Sual plait materials are rind strips of bamboo, rattan or lianas. Soaked before use they are more pliable. When drying, the fibres shrink and the connection tightens.</figcaption>
+</figure>
+
 
 
