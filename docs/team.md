@@ -6,7 +6,7 @@ title: Team
 ### Daniela Mitterberger
 Doctoral Researcher at Gramazio Kohler Research, Switzerland, where she ...
 
-<img src="{{site.baseurl}}images/team-dm.png" alt="Daniela Mitterberger" class="rounded-corners">
+<img src="{{site.baseurl}}images/team-dm.png" alt="Daniela Mitterberger" style="width:200px" class="rounded-corners">
 
 
 ### Lidia Atanasova
