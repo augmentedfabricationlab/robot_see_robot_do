@@ -9,12 +9,12 @@ Daniela Mitterberger is an architect and researcher with a strong interest in ne
 
 ### Lidia Atanasova
 <img src="{{site.baseurl}}images/team-la.png" alt="Lidia Atanasova" style="width:200px" class="drop-corners">
-Lidia Atanasova is an architect and researcher at the [Professorship for Digital Fabrication (Augmented Fabrication Lab)](https://www.arc.ed.tum.de/df/news/), a research group based at the School of Engineering and Design at the Technical University of Munich. She holds a Master's degree in Architecture from TU Vienna and was an exchange student at ITECH at the University of Stuttgart. She worked as an assistant at the Institute of Art and Design at TU Vienna and as an intern at Dietrich Untertrifaller Architekten in Vienna.
+Lidia Atanasova is an architect and researcher at the Professorship for [Digital Fabrication](https://www.arc.ed.tum.de/df/news/) (Augmented Fabrication Lab), a research group based at the School of Engineering and Design at the Technical University of Munich. She holds a Master's degree in Architecture from TU Vienna and was an exchange student at ITECH at the University of Stuttgart. She worked as an assistant at the Institute of Art and Design at TU Vienna and as an intern at Dietrich Untertrifaller Architekten in Vienna.
 
 
 ### Kathrin Dörfler
 <img src="{{site.baseurl}}images/team-kd.png" alt="Kathrin Dörfler" style="width:200px" class="drop-corners">
-Kathrin Dörfler is an architect, researcher, and educator in computational design and robotic fabrication. Kathrin’s doctoral thesis was carried out at Gramazio Kohler Research, ETH Zurich, as part of the National Centre of Competence in Research Digital Fabrication (NCCR DFAB). In July 2019, Kathrin joined the School of Engineering at the Technical University of Munich as a Tenure Track Professor to set up a research group for [Digital Fabrication](https://www.arc.ed.tum.de/df/news/) at the Department of Architecture. The research interests of her group are focused on collaborative fabrication processes, on-site robotics, and fabrication-aware design.
+Kathrin Dörfler is an architect, researcher, and educator in computational design and robotic fabrication. Kathrin’s doctoral thesis was carried out at Gramazio Kohler Research, ETH Zurich, as part of the National Centre of Competence in Research Digital Fabrication (NCCR DFAB). In July 2019, Kathrin joined the School of Engineering at the Technical University of Munich as a Tenure Track Professor to set up a research group for [Digital Fabrication](https://www.arc.ed.tum.de/df/news/) (Augmented Fabrication Lab) at the Department of Architecture. The research interests of her group are focused on collaborative fabrication processes, on-site robotics, and fabrication-aware design.
 
 ### Timothy Sandy
 <img src="{{site.baseurl}}images/team-ts.jpg" alt="Timothy Sandy" style="width:200px" class="drop-corners">
