@@ -11,7 +11,7 @@ title: Inspiration
 </figure>
 
 <figure>
-<iframe width="640" heigt="350" src="https://www.youtube.com/embed/P0cei5ihF1c" title="Macrame pattern" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen align="center"></iframe>
+<iframe width="640" heigt="350" src="https://www.youtube.com/embed/P0cei5ihF1c" title="Macrame pattern" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="center"></iframe>
 <figcaption>Macrame pattern making</figcaption>
 </figure>
 
