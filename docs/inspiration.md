@@ -27,6 +27,7 @@ title: Inspiration
   <figcaption>Fine handwork rattan connection. The fibre material is soaked before use, such that they are more appliable. When drying, the fibres shrink and the connection tightens.</figcaption>
 </figure>
 
+
 ### Reciprocal Frame Structures
 
 <figure>
