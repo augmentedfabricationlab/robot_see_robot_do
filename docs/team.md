@@ -4,10 +4,11 @@ title: Team
 ---
 
 ### Daniela Mitterberger
+
+
+<img src="{{site.baseurl}}images/team-dm.png" alt="Daniela Mitterberger" style="width:200px" class="drop-corners" align="left">
+
 Doctoral Researcher at Gramazio Kohler Research, Switzerland, where she ...
-
-<img src="{{site.baseurl}}images/team-dm.png" alt="Daniela Mitterberger" style="width:200px" class="drop-corners">
-
 
 ### Lidia Atanasova
 Doctoral Researcher at Augmented Fabrication Lab, Germany, where she ...
