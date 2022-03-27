@@ -1,7 +1,6 @@
 ---
-layout: page
+layout: post
 title: Assembly Information Model
-permalink: /aim/
 ---
 
 #### Assembly Information Model
