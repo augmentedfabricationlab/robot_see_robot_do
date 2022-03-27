@@ -7,7 +7,7 @@ title: Method
 Human robot collaboration ...
 
 ### Assembly Information Model
-[AIM](https://github.com/augmentedfabricationlab/robot_see_robot_do/docs/_method/aim.md)
+[AIM]({{site.baseurl}}/_method/aim.md)
 
 ### Design Principles
 * Designing processes instead of products
