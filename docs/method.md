@@ -7,7 +7,7 @@ title: Method
 Human robot collaboration ...
 
 ### Assembly Information Model
-[AIM]({{site.baseurl}}/_method/aim.md)
+[AIM]({{site.baseurl}}_method/aim.md)
 
 ### Design Principles
 * Designing processes instead of products
