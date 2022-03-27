@@ -3,34 +3,11 @@ layout: page
 title: Method
 ---
 
-### Approach
-Human robot collaboration ...
-
-### Assembly Information Model
-[AIM]({{site.baseurl}}aim)
-
-### Design Principles
-* Designing processes instead of products
-* Building structures with turn-taking actions
-* Reciprocal frame structure assembled in turn taking actions between humans and a robot and joined with rope joints ...
-
-
-### Workflow
-Flowchart ??
-
-<ul>
-  {% for post in site.posts %}
-    <li>
-      <a href="{{site.baseurl}}{{ post.url }}">{{ post.title }}</a>
-    </li>
-  {% endfor %}
-</ul>
-
 <div class="posts">
   {% for post in site.posts %}
   <div class="post">
     <h1 class="post-title">
-      <a href="{{ post.url }}">
+      <a href="{{site.baseurl}}{{ post.url }}">
         {{ post.title }}
       </a>
     </h1>
