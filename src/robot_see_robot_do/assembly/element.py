@@ -9,13 +9,15 @@ import json
 from compas.datastructures import Mesh
 from compas.datastructures import mesh_transform
 
-from compas.geometry import Frame
+from compas.geometry import Frame, Vector
 from compas.geometry import Box
+from compas.geometry import Transformation, Translation
 from compas.geometry import centroid_points
 from compas.geometry import cross_vectors
 from compas.geometry import normalize_vector
 from compas.geometry import centroid_polyhedron
 from compas.geometry import volume_polyhedron
+from compas.datastructures import Mesh, mesh_transform
 
 from .utilities import _deserialize_from_data
 from .utilities import _serialize_to_data
@@ -57,6 +59,14 @@ class Element(object):
 
     def __init__(self, frame):
         super(Element, self).__init__()
+
+        self.message = "Hello"
+        self.connector_frame_1 = None
+        self.connector_frame_2 = None
+        self.connector_1_state = True
+        self.connector_2_state = True
+        self._type = ''
+        self._base_frame = None
 
         self.frame = frame
         self._tool_frame = None
@@ -368,6 +378,22 @@ class Element(object):
         if self.path:
             d['path'] = [f.to_data() for f in self.path]
 
+        if self.connector_frame_1:
+            d['connector_frame_1'] = self.connector_frame_1.to_data()
+
+        if self.connector_frame_2:
+            d['connector_frame_2'] = self.connector_frame_2.to_data()
+
+        d['connector_1_state'] = self.connector_1_state
+
+        d['connector_2_state'] = self.connector_2_state
+
+        if self._type:
+            d['_type'] = self._type
+
+        if self._base_frame:
+            d['_base_frame'] = self._base_frame.to_data()
+
         return d
 
     @data.setter
@@ -386,6 +412,18 @@ class Element(object):
             #self.trajectory = _deserialize_from_data(data['trajectory'])
         if 'path' in data:
             self.path = [Frame.from_data(d) for d in data['path']]
+        if 'connector_frame_1' in data:
+            self.connector_frame_1 = Frame.from_data(data['connector_frame_1'])
+        if 'connector_frame_2' in data:
+            self.connector_frame_2 = Frame.from_data(data['connector_frame_2'])
+        if 'connector_1_state' in data:
+            self.connector_1_state = data['connector_1_state']
+        if 'connector_2_state' in data:
+            self.connector_2_state = data['connector_2_state']
+        if '_type' in data:
+            self._type = data['_type']
+        if '_base_frame' in data:
+            self._base_frame = Frame.from_data(data['_base_frame'])
 
     def to_data(self):
         """Returns the data dictionary that represents the element.
@@ -426,6 +464,12 @@ class Element(object):
         self.frame.transform(transformation)
         if self._tool_frame:
             self.tool_frame.transform(transformation)
+        if self.connector_frame_1:
+            self.connector_frame_1.transform(transformation)
+        if self.connector_frame_2:
+            self.connector_frame_2.transform(transformation)
+        if self._base_frame:
+            self._base_frame.transform(transformation)
         if self._source:
             if type(self._source) == Mesh:
                 mesh_transform(self._source, transformation)  # it would be really good to have Mesh.transform()
@@ -468,6 +512,18 @@ class Element(object):
         elem = Element(self.frame.copy())
         if self._tool_frame:
             elem.tool_frame = self.tool_frame.copy()
+        if self.connector_frame_1:
+            elem.connector_frame_1 = self.connector_frame_1.copy()
+        if self.connector_frame_2:
+            elem.connector_frame_2 = self.connector_frame_2.copy()
+        if self.connector_1_state:
+            elem.connector_1_state = self.connector_1_state
+        if self.connector_2_state:
+            elem.connector_2_state = self.connector_2_state
+        if self._type:
+            elem._type = self._type
+        if self._base_frame:
+            elem._base_frame = self._base_frame.copy()
         if self._source:
             elem._source = self._source.copy()
         if self._mesh:
@@ -476,3 +532,91 @@ class Element(object):
             elem.path = [f.copy() for f in self.path]
 
         return elem
+
+    def get_pose_quaternion(self):
+        """ formats the element's frame to a pose quaternion and returns the pose"""
+        return list(self.frame.point) + list(self.frame.quaternion)
+
+    def connectors(self, state='all'):
+        """ Create a list containing the connector_frames of an element.
+        """
+        connector_frames = []
+
+        if state == 'all':
+            return self.connector_frame_1, self.connector_frame_2
+        elif state == 'open':
+            if self.connector_1_state:
+                connector_frames.append(self.connector_frame_1)
+            if self.connector_2_state:
+                connector_frames.append(self.connector_frame_2)
+            return connector_frames
+        elif state == 'closed':
+            if not self.connector_1_state:
+                connector_frames.append(self.connector_frame_1)
+            if not self.connector_2_state:
+                connector_frames.append(self.connector_frame_2)
+            return connector_frames
+        else:
+            return []
+
+    def options_elements(self, elem_x, elem_y, elem_z):
+
+        options = []
+
+        type_map = {'X': elem_x, 'Y': elem_y, 'Z': elem_z}
+
+        if self.connector_1_state == True:
+
+            T = Transformation.from_frame_to_frame(type_map[self._type].frame, self.connector_frame_1)
+            # T = Transformation.from_frame_to_frame(Frame.worldXY(), self.connector_frame_1)
+            my_new_element = type_map[self._type].transformed(T)
+            options.append(my_new_element)
+
+        if self.connector_2_state == True:
+            T = Transformation.from_frame_to_frame(type_map[self._type].frame, self.connector_frame_2)
+            # T = Transformation.from_frame_to_frame(Frame.worldXY(), self.connector_frame_2)
+            my_new_element = type_map[self._type].transformed(T)
+            options.append(my_new_element)
+
+        return options
+
+    def options_vectors_(self, len):
+
+        options = []
+
+        if self.connector_1_state == True:
+            p = self.frame.point
+            T1 = Translation(self.frame.xaxis*self._source.height/2.*-1)
+            T2 = Translation(self.frame.xaxis*len)
+            options.append((p.transformed(T1), Vector.from_start_end(p.transformed(T1), p.transformed(T2))))
+
+        if self.connector_2_state == True:
+            p = self.frame.point
+            T1 = Translation(self.frame.xaxis*self._source.height/2.*1)
+            T2 = Translation(self.frame.xaxis*-len)
+            options.append((p.transformed(T1), Vector.from_start_end(p.transformed(T1), p.transformed(T2))))
+
+        if options:
+            return options
+        else:
+            return []
+
+    def options_vectors(self, len):
+
+        options = []
+        if self.connector_1_state == True:
+            p = self.connector_frame_1.point + Vector.Zaxis()*0.05
+            T1 = Translation.from_vector(self.frame.xaxis*self._source.height/2.*-1)
+            T2 = Translation.from_vector(self.frame.xaxis*len)
+            options.append((p.transformed(T1), Vector.from_start_end(p.transformed(T1), p.transformed(T2))))
+
+        if self.connector_2_state == True:
+            p = self.connector_frame_2.point + Vector.Zaxis()*0.05
+            T1 = Translation.from_vector(self.frame.xaxis*self._source.height/2.*1)
+            T2 = Translation.from_vector(self.frame.xaxis*-len)
+            options.append((p.transformed(T1), Vector.from_start_end(p.transformed(T1), p.transformed(T2))))
+
+        if options:
+            return options
+        else:
+            return []
