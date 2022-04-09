@@ -50,11 +50,6 @@ Execute the commands below in Anaconda Prompt:
 
     (rsrd) conda install git
 
-#### Assembly Information Model
-    
-    (rsrd) python -m pip install git+https://github.com/augmentedfabricationlab/assembly_information_model@master#egg=assembly_information_model
-    (rsrd) python -m compas_rhino.install -p assembly_information_model -v 7.0
-
 #### UR Fabrication Control
     
     (rsrd) python -m pip install git+https://github.com/augmentedfabricationlab/ur_fabrication_control@master#egg=ur_fabrication_control
