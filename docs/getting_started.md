@@ -35,7 +35,7 @@ Execute the commands below in Anaconda Prompt:
 #### Verify Installation
 
     (rsrd) pip show compas_fab
-####
+
     Name: compas-fab
     Version: 0.XX.X
     Summary: Robotic fabrication package for the COMPAS Framework
