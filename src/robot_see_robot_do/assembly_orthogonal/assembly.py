@@ -4,9 +4,11 @@ from __future__ import print_function
 
 import json
 import os
+import math
+
 from copy import deepcopy
 from compas.geometry import Frame
-from compas.geometry import Transformation, Translation
+from compas.geometry import Transformation, Translation, Rotation
 from compas.geometry import distance_point_point
 from compas.datastructures import Network, network, mesh_offset
 from compas_ghpython.artists import MeshArtist
@@ -169,70 +171,63 @@ class Assembly(FromToData, FromToJson):
                                     x=x, y=y, z=z, element=element)
         return key
 
-    def add_element_(self, elem, current_key, direction=0, shift_value=0, placed_by='human', on_ground=False, module_index=0, frame_id=None, frame_est=None):
+
+    def add_unit_element(self, current_key, flip='AA', shift_value=0, angle=90, placed_by='human', on_ground=False, unit_index=0, frame_id=None, frame_est=None):
         """Add an element to the assembly.
         """
+        radius = self.globals['radius']
+        height = self.globals['height']
+        shift_value = self.globals['shift_value']
+
         N = self.network.number_of_nodes()
 
-        new_elem_type = elem._type
         current_elem = self.network.node[current_key]['element']
 
-        if direction == 0:
-            current_connector = current_elem.connector_frame_2
-        elif direction == 1:
-            current_connector = current_elem.connector_frame_1
-
-        if module_index == 0:
-            connector_1_map = {0: False, 1:True}
-            connector_2_map = {0: True, 1:False}
-        elif module_index == 1:
-            connector_1_map = {0: True, 1:True}
-            connector_2_map = {0: True, 1:True}
+        # Find the open connector of the current element
+        if current_elem.connector_1_state:
+            current_connector_frame = current_elem.connector_frame_1
         else:
-            if new_elem_type == 'Z':
-                connector_1_map = {0: True, 1:True}
-                connector_2_map = {0: False, 1:False}
-            else:
-                connector_1_map = {0: True, 1:True}
-                connector_2_map = {0: True, 1:True}
-            if direction == 1:
-                current_elem.connector_1_state = False
-            else:
-                current_elem.connector_2_state = False
+            current_connector_frame = current_elem.connector_frame_2
 
-        T = Transformation.from_frame_to_frame(Frame.worldXY(), current_connector)
-
-        new_elem = elem.transformed(T)
-
-        orient_map = {'X': current_elem._base_frame.xaxis, 'Y': current_elem._base_frame.yaxis, 'Z': current_elem._base_frame.zaxis}
-        axis = orient_map[current_elem._type]
-        if direction == 1:
-            a = -1
-        elif direction == 0:
+        if flip == 'AA':
+            a = b = 1
+        if flip == 'AB':
             a = 1
-        T = Translation.from_vector(axis*shift_value*a)
+            b = -1
+        if flip == 'BA':
+            a = -1
+            b = 1
+        if flip == 'BB':
+            a = b = -1
 
+        if placed_by == 'robot':
+            R = Rotation.from_axis_and_angle(current_elem.frame.zaxis, math.radians(angle*a), current_connector_frame.point)
+
+        else:
+            R = Rotation.from_axis_and_angle(current_elem.frame.yaxis, math.radians(angle*b), current_connector_frame.point)
+
+        new_elem = current_elem.transformed(R)
+
+        if unit_index == 0:
+            T = Translation.from_vector(new_elem.frame.zaxis*radius*a*b*2.)
+        if unit_index == 1:
+            T = Translation.from_vector(new_elem.frame.yaxis*radius*-a*2.+ new_elem.frame.zaxis*-radius*a*2.)
+        T_shift = Translation.from_vector(current_connector_frame.xaxis*shift_value)
         new_elem.transform(T)
-
-        new_elem.connector_1_state = connector_1_map[direction]
-        new_elem.connector_2_state = connector_2_map[direction]
 
         #if self.collision_check(new_elem, tolerance = -0.001) == False:
         if True:
-            self.add_element(new_elem, elem_type=new_elem_type, placed_by=placed_by, on_ground=on_ground, frame_id=frame_id, frame_est=frame_est)
+            self.add_element(new_elem, placed_by=placed_by, on_ground=on_ground, frame_id=frame_id, frame_est=frame_est)
 
-            if module_index == 0:
+            if unit_index == 0:
                 self.network.add_edge(current_key, N, edge_to='neighbour')
-            elif module_index == 1:
-                self.network.add_edge(N-1, N, edge_to='parent')
             else:
                 self.network.add_edge(N-1, N, edge_to='parent')
-                self.network.add_edge(N-2, N, edge_to='parent')
+                self.network.add_edge(current_key, N, edge_to='parent')
 
-            self.check_open_connectors(new_elem, module_index)
+            self.update_connectors_states(current_key, new_elem, unit_index)
 
         return new_elem
-
 
     def add_connection(self, u, v, attr_dict=None, **kwattr):
         """Add a connection between two elements and specify its attributes.
@@ -365,6 +360,26 @@ class Assembly(FromToData, FromToJson):
                 direction = 1
             return direction
 
+    def direction_rf(self, current_key, current_connector_key):
+        """Compute direction of growth.
+        """
+        current_elem = self.network.node[current_key]['element']
+        current_elem_type = current_elem._type
+        current_connectors = current_elem.connectors(state='open')
+
+        orient_map = {'X': 0, 'Y': 1, 'Z': 2}
+        axis = orient_map[current_elem_type]
+
+        current_location = current_elem.tool_frame.point[axis]
+
+        if current_connectors:
+            next_location = current_connectors[current_connector_key].point[axis]
+            if current_location > next_location:
+                direction = 0
+            else:
+                direction = 1
+            return direction
+
     def sequence(self, start_type, on_ground=False):
         """Compute the sequence for element placement.
         """
@@ -378,6 +393,21 @@ class Assembly(FromToData, FromToJson):
             sequence = ['X', 'Y', 'Z']  # should be Y,X,Z when on ground=False
         if start_type == 'Z':
             sequence = ['Z', 'X', 'Y']
+
+        return sequence
+
+    def sequence_rf(self, start_type, on_ground=False):
+        """Compute the sequence for element placement.
+        """
+        sequence = []
+
+        if start_type == 'X':
+            sequence = ['Y', 'Z']
+        #if start_type == 'Y' and on_ground:
+        elif start_type == 'Y':
+            sequence = ['X', 'Z']
+        else:
+            sequence = ['X', 'Y']
 
         return sequence
 
@@ -407,30 +437,28 @@ class Assembly(FromToData, FromToJson):
 
         return collision
 
-    def add_module(self, elem_x, elem_y, elem_z, current_key, direction=0, shift_value=0, on_ground=False, added_frame_id=None, frame_est=None):
+    def close_unit(self, current_key, flip=0, shift_value=0, angle=90, on_ground=False, added_frame_id=None, frame_est=None):
         """Add a module to the assembly.
         """
-        type_map = {'X': elem_x, 'Y': elem_y, 'Z': elem_z}
-        current_elem_type = self.network.node[current_key]['elem_type']
-        sequence = self.sequence(current_elem_type)
 
         keys_robot = []
 
-        for i, s in enumerate(sequence):
-            if i != 0:
+        for i in range(2):
+            if i == 0:
                 placed_by = 'robot'
                 frame_id = None
-                my_new_elem = self.add_element_(type_map[s], current_key, direction=direction, shift_value=shift_value, placed_by=placed_by, on_ground=False, module_index=i, frame_id=frame_id, frame_est=None)
+                my_new_elem = self.add_unit_element(current_key, flip=flip, shift_value=shift_value, angle=angle, placed_by=placed_by, on_ground=False, unit_index=i, frame_id=frame_id, frame_est=None)
                 keys_robot += list(self.network.nodes_where({'element': my_new_elem}))
             else:
                 placed_by = 'human'
                 frame_id = added_frame_id
-                my_new_elem = self.add_element_(type_map[s], current_key, direction=direction, shift_value=shift_value, placed_by=placed_by, on_ground=False, module_index=i, frame_id=frame_id, frame_est=frame_est)
+                my_new_elem = self.add_unit_element(current_key, flip=flip, shift_value=shift_value, angle=angle, placed_by=placed_by, on_ground=False, unit_index=i, frame_id=frame_id, frame_est=frame_est)
                 keys_human = list((self.network.nodes_where({'element': my_new_elem})))
 
         keys_dict = {'keys_human': keys_human, 'keys_robot':keys_robot}
 
         return keys_dict
+
 
     def parent_key(self, point, within_dist):
         """Return the parent key of a tracked object.
@@ -447,33 +475,23 @@ class Assembly(FromToData, FromToJson):
         return parent_key
 
 
-    def check_open_connectors(self, my_new_elem, module_index):
+    def update_connectors_states(self, current_key, my_new_elem, unit_index):
 
-        # TO DO: get elems in defined distance (maybe useful: # geometric keys)
-        #key_index = self.network.key_index()
-        #keys = [key_index[key] for key in self.network.nodes()]
-        keys = [key for key, element in self.elements()]
-        new_keys = keys[:-1]
+        key_index = self.network.key_index()
+        current_elem = self.network.node[current_key]['element']
+        keys = [key_index[key] for key in self.network.nodes()]
+        previous_elem = self.network.node[keys[-2]]['element']
 
-        for key in new_keys:
-            sel_element = self.network.node[key]['element']
-            elem_connectors = self.element(key).connectors(state='open')
-            for i, connector in enumerate(elem_connectors):
-                if my_new_elem._base_frame == connector and module_index == 2:
-                    if len(elem_connectors) == 2:
-                        if i == 0:
-                            sel_element.connector_1_state = False
-                            my_new_elem.connector_2_state = False
-                        elif i == 1:
-                            sel_element.connector_2_state = False
-                            my_new_elem.connector_1_state = False
-                    elif len(elem_connectors) == 1:
-                        if sel_element.connector_1_state == False:
-                            sel_element.connector_2_state = False
-                            my_new_elem.connector_1_state = False
-                        elif sel_element.connector_2_state == False:
-                            sel_element.connector_1_state = False
-                            my_new_elem.connector_2_state = False
+        if unit_index == 1:
+            if current_elem.connector_1_state:
+                previous_elem.connector_1_state = False
+                current_elem.connector_1_state = False
+                my_new_elem.connector_1_state = False
+            if current_elem.connector_2_state:
+                previous_elem.connector_2_state = False
+                current_elem.connector_2_state = False
+                my_new_elem.connector_2_state = False
+
 
     def keys_within_radius(self, current_key):
 

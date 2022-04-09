@@ -3,6 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 import json
+import math
 
 #from compas_fab.robots import JointTrajectoryPoint
 
@@ -11,13 +12,14 @@ from compas.datastructures import mesh_transform
 
 from compas.geometry import Frame, Vector
 from compas.geometry import Box
-from compas.geometry import Transformation, Translation
+from compas.geometry import Transformation, Translation, Rotation
 from compas.geometry import centroid_points
 from compas.geometry import cross_vectors
 from compas.geometry import normalize_vector
 from compas.geometry import centroid_polyhedron
 from compas.geometry import volume_polyhedron
 from compas.datastructures import Mesh, mesh_transform
+
 
 from .utilities import _deserialize_from_data
 from .utilities import _serialize_to_data
@@ -559,64 +561,105 @@ class Element(object):
         else:
             return []
 
-    def options_elements(self, elem_x, elem_y, elem_z):
+
+    def options_elements(self, flip, radius, shift_value, angle):
 
         options = []
 
-        type_map = {'X': elem_x, 'Y': elem_y, 'Z': elem_z}
+        if flip == 'AA':
+            a = b = 1
+        if flip == 'AB':
+            a = 1
+            b = -a
+        if flip == 'BA':
+            a = -1
+            b = -a
+        if flip == 'BB':
+            a = b = -1
 
         if self.connector_1_state == True:
-
-            T = Transformation.from_frame_to_frame(type_map[self._type].frame, self.connector_frame_1)
-            # T = Transformation.from_frame_to_frame(Frame.worldXY(), self.connector_frame_1)
-            my_new_element = type_map[self._type].transformed(T)
-            options.append(my_new_element)
+            R1 = Rotation.from_axis_and_angle(self.connector_frame_1.zaxis, math.radians(angle*a), point = self.connector_frame_1.point)
+            R2 = Rotation.from_axis_and_angle(self.connector_frame_1.yaxis, math.radians(angle*b), point = self.connector_frame_1.point)
+            e1 = self.transformed(R1)
+            e2 = self.transformed(R2)
+            T1 = Translation.from_vector(e1.frame.zaxis*radius*a*b*2.)
+            T2 = Translation.from_vector(e2.frame.yaxis*radius*-a*2.+ e2.frame.zaxis*-radius*a*2.)
+            T_shift = Translation.from_vector(self.connector_frame_1.xaxis*shift_value)
+            e1.transform(T1*T_shift)
+            e2.transform(T2*T_shift)
+            options.append(e1)
+            options.append(e2)
 
         if self.connector_2_state == True:
-            T = Transformation.from_frame_to_frame(type_map[self._type].frame, self.connector_frame_2)
-            # T = Transformation.from_frame_to_frame(Frame.worldXY(), self.connector_frame_2)
-            my_new_element = type_map[self._type].transformed(T)
-            options.append(my_new_element)
+            R1 = Rotation.from_axis_and_angle(self.connector_frame_2.zaxis, math.radians(angle*a), point = self.connector_frame_2.point)
+            R2 = Rotation.from_axis_and_angle(self.connector_frame_2.yaxis, math.radians(angle*b), point = self.connector_frame_2.point)
+            e1 = self.transformed(R1)
+            e2 = self.transformed(R2)
+            T1 = Translation.from_vector(e1.frame.zaxis*radius*a*b*2.)
+            T2 = Translation.from_vector(e2.frame.yaxis*radius*-a*2.+ e2.frame.zaxis*-radius*a*2.)
+            T_shift = Translation.from_vector(self.connector_frame_2.xaxis*shift_value)
+            e1.transform(T1*T_shift)
+            e2.transform(T2*T_shift)
+            options.append(e1)
+            options.append(e2)
+
+        # else:
+        #     raise ValueError('All element connectors closed.')
 
         return options
 
-    def options_vectors_(self, len):
-
-        options = []
-
-        if self.connector_1_state == True:
-            p = self.frame.point
-            T1 = Translation(self.frame.xaxis*self._source.height/2.*-1)
-            T2 = Translation(self.frame.xaxis*len)
-            options.append((p.transformed(T1), Vector.from_start_end(p.transformed(T1), p.transformed(T2))))
-
-        if self.connector_2_state == True:
-            p = self.frame.point
-            T1 = Translation(self.frame.xaxis*self._source.height/2.*1)
-            T2 = Translation(self.frame.xaxis*-len)
-            options.append((p.transformed(T1), Vector.from_start_end(p.transformed(T1), p.transformed(T2))))
-
-        if options:
-            return options
-        else:
-            return []
-
     def options_vectors(self, len):
 
+        vector_vertical_offset = 0.01
+
         options = []
         if self.connector_1_state == True:
-            p = self.connector_frame_1.point + Vector.Zaxis()*0.05
-            T1 = Translation.from_vector(self.frame.xaxis*self._source.height/2.*-1)
-            T2 = Translation.from_vector(self.frame.xaxis*len)
-            options.append((p.transformed(T1), Vector.from_start_end(p.transformed(T1), p.transformed(T2))))
-
-        if self.connector_2_state == True:
-            p = self.connector_frame_2.point + Vector.Zaxis()*0.05
-            T1 = Translation.from_vector(self.frame.xaxis*self._source.height/2.*1)
+            p = self.connector_frame_1.point + Vector.Zaxis()*vector_vertical_offset
+            T1 = Translation.from_vector(self.frame.xaxis*self._source.diameter/2.*-1)
             T2 = Translation.from_vector(self.frame.xaxis*-len)
             options.append((p.transformed(T1), Vector.from_start_end(p.transformed(T1), p.transformed(T2))))
 
+        if self.connector_2_state == True:
+            p = self.connector_frame_2.point + Vector.Zaxis()*vector_vertical_offset
+            T1 = Translation.from_vector(self.frame.xaxis*self._source.diameter/2.*1)
+            T2 = Translation.from_vector(self.frame.xaxis*len)
+            options.append((p.transformed(T1), Vector.from_start_end(p.transformed(T1), p.transformed(T2))))
+
         if options:
             return options
         else:
             return []
+
+
+    """
+    def options_elements(self, elem_x, elem_y, flip, ratio):
+
+        options = []
+
+        #type_map = {'X': elem_x, 'Y': elem_y, 'Z': elem_x}
+
+        if self.connector_1_state == True:
+            T1 = Transformation.from_frame_to_frame(Frame.WorldXY(), self.connector_frame_1)
+            e = type_map[self._type].transformed(T1)
+            if flip == 0:
+                T2 = Translation.from_vector(e.frame.xaxis*elem._source.diameter*ratio)
+            else:
+                T2 = Translation.from_vector(e.frame.xaxis*-elem._source.diameter*ratio)
+            e.transform(T2)
+            options.append(e)
+
+        if self.connector_2_state == True:
+            T1 = Transformation.from_frame_to_frame(Frame.WorldXY(), self.connector_frame_2)
+            e = type_map[self._type].transformed(T1)
+            if flip == 0:
+                T2 = Translation.from_vector(e.frame.xaxis*elem._source.height*ratio)
+            else:
+                T2 = Translation.from_vector(e.frame.xaxis*-elem._source.height*ratio)
+            e.transform(T2)
+            options.append(e)
+
+        # else:
+        #     raise ValueError('All element connectors closed.')
+
+        return options
+    """
