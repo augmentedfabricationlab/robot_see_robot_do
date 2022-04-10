@@ -172,7 +172,7 @@ class Assembly(FromToData, FromToJson):
         return key
 
 
-    def add_unit_element(self, current_key, flip='AA', shift_value=0, angle=90, placed_by='human', on_ground=False, unit_index=0, frame_id=None, frame_est=None):
+    def add_unit_element(self, current_key, shift_value=0, angle=0, placed_by='human', on_ground=False, unit_index=0, frame_id=None, frame_est=None):
         """Add an element to the assembly.
         """
         radius = self.globals['radius']
@@ -189,30 +189,16 @@ class Assembly(FromToData, FromToJson):
         else:
             current_connector_frame = current_elem.connector_frame_2
 
-        if flip == 'AA':
-            a = b = 1
-        if flip == 'AB':
-            a = 1
-            b = -1
-        if flip == 'BA':
-            a = -1
-            b = 1
-        if flip == 'BB':
-            a = b = -1
-
         if placed_by == 'robot':
-            R = Rotation.from_axis_and_angle(current_elem.frame.zaxis, math.radians(angle*a), current_connector_frame.point)
-
+            R1 = Rotation.from_axis_and_angle(current_connector_frame.zaxis, math.radians(120), current_connector_frame.point)
         else:
-            R = Rotation.from_axis_and_angle(current_elem.frame.yaxis, math.radians(angle*b), current_connector_frame.point)
+            R1 = Rotation.from_axis_and_angle(current_connector_frame.zaxis, math.radians(240), current_connector_frame.point)
 
-        new_elem = current_elem.transformed(R)
+        new_elem = current_elem.transformed(R1)
 
-        if unit_index == 0:
-            T = Translation.from_vector(new_elem.frame.zaxis*radius*a*b*2.)
-        if unit_index == 1:
-            T = Translation.from_vector(new_elem.frame.yaxis*radius*-a*2.+ new_elem.frame.zaxis*-radius*a*2.)
-        new_elem.transform(T)
+        # Define a desired rotation in reference to the build element
+        R2 = Rotation.from_axis_and_angle(current_elem.frame.xaxis, math.radians(angle), current_connector_frame.point)
+        new_elem.transform(R2)
 
         #if self.collision_check(new_elem, tolerance = -0.001) == False:
         if True:
@@ -436,7 +422,7 @@ class Assembly(FromToData, FromToJson):
 
         return collision
 
-    def close_unit(self, current_key, flip=0, shift_value=0, angle=90, on_ground=False, added_frame_id=None, frame_est=None):
+    def close_unit(self, current_key, shift_value=0, angle=90, on_ground=False, added_frame_id=None, frame_est=None):
         """Add a module to the assembly.
         """
 
@@ -446,12 +432,12 @@ class Assembly(FromToData, FromToJson):
             if i == 0:
                 placed_by = 'robot'
                 frame_id = None
-                my_new_elem = self.add_unit_element(current_key, flip=flip, shift_value=shift_value, angle=angle, placed_by=placed_by, on_ground=False, unit_index=i, frame_id=frame_id, frame_est=None)
+                my_new_elem = self.add_unit_element(current_key, shift_value=shift_value, angle=angle, placed_by=placed_by, on_ground=False, unit_index=i, frame_id=frame_id, frame_est=None)
                 keys_robot += list(self.network.nodes_where({'element': my_new_elem}))
             else:
                 placed_by = 'human'
                 frame_id = added_frame_id
-                my_new_elem = self.add_unit_element(current_key, flip=flip, shift_value=shift_value, angle=angle, placed_by=placed_by, on_ground=False, unit_index=i, frame_id=frame_id, frame_est=frame_est)
+                my_new_elem = self.add_unit_element(current_key, shift_value=shift_value, angle=angle, placed_by=placed_by, on_ground=False, unit_index=i, frame_id=frame_id, frame_est=frame_est)
                 keys_human = list((self.network.nodes_where({'element': my_new_elem})))
 
         keys_dict = {'keys_human': keys_human, 'keys_robot':keys_robot}

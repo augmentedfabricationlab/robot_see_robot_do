@@ -3,6 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 import json
+import math
 
 #from compas_fab.robots import JointTrajectoryPoint
 
@@ -11,13 +12,14 @@ from compas.datastructures import mesh_transform
 
 from compas.geometry import Frame, Vector
 from compas.geometry import Box
-from compas.geometry import Transformation, Translation
+from compas.geometry import Transformation, Translation, Rotation
 from compas.geometry import centroid_points
 from compas.geometry import cross_vectors
 from compas.geometry import normalize_vector
 from compas.geometry import centroid_polyhedron
 from compas.geometry import volume_polyhedron
 from compas.datastructures import Mesh, mesh_transform
+
 
 from .utilities import _deserialize_from_data
 from .utilities import _serialize_to_data
@@ -560,41 +562,31 @@ class Element(object):
             return []
 
 
-
-    def options_elements(self, elem, flip, shift_value):
+    def options_elements(self, angle):
 
         options = []
 
-        #type_map = {'X': elem_y, 'Y': elem_y, 'Z': elem_x}
-
         if self.connector_1_state == True:
-            T1 = Transformation.from_frame(self.connector_frame_1)
-            e = elem.transformed(T1)
-            if flip == 0:
-                T2 = Translation.from_vector(e.frame.xaxis*e._source.height*shift_value)
-            else:
-                T2 = Translation.from_vector(e.frame.xaxis*-e._source.height*shift_value)
-            e.transform(T2)
-            options.append(e)
-
+            current_connector = self.connector_frame_1
         if self.connector_2_state == True:
-            T1 = Transformation.from_frame(self.connector_frame_2)
-            e = elem.transformed(T1)
-            if flip == 0:
-                T2 = Translation.from_vector(self.connector_frame_2.xaxis*e._source.height*shift_value)
-            else:
-                T2 = Translation.from_vector(self.connector_frame_2.xaxis*-e._source.height*shift_value)
-            e.transform(T2)
-            options.append(e)
+            current_connector = self.connector_frame_2
 
-        # else:
-        #     raise ValueError('All element connectors closed.')
+        R1 = Rotation.from_axis_and_angle(current_connector.zaxis, math.radians(120), current_connector.point)
+        R2 = Rotation.from_axis_and_angle(current_connector.zaxis, math.radians(240), current_connector.point)
+        e1 = self.transformed(R1)
+        e2 = self.transformed(R2)
+        R3 = Rotation.from_axis_and_angle(self.frame.xaxis, math.radians(angle), current_connector.point)
+        e1.transform(R3)
+        e2.transform(R3)
+        options.append(e1)
+        options.append(e2)
+
 
         return options
 
     def options_vectors(self, len):
 
-        vector_vertical_offset = 0.02
+        vector_vertical_offset = 0.01
 
         options = []
         if self.connector_1_state == True:
@@ -614,36 +606,3 @@ class Element(object):
         else:
             return []
 
-
-    """
-    def options_elements(self, elem_x, elem_y, flip, ratio):
-
-        options = []
-
-        #type_map = {'X': elem_x, 'Y': elem_y, 'Z': elem_x}
-
-        if self.connector_1_state == True:
-            T1 = Transformation.from_frame_to_frame(Frame.WorldXY(), self.connector_frame_1)
-            e = type_map[self._type].transformed(T1)
-            if flip == 0:
-                T2 = Translation.from_vector(e.frame.xaxis*elem._source.diameter*ratio)
-            else:
-                T2 = Translation.from_vector(e.frame.xaxis*-elem._source.diameter*ratio)
-            e.transform(T2)
-            options.append(e)
-
-        if self.connector_2_state == True:
-            T1 = Transformation.from_frame_to_frame(Frame.WorldXY(), self.connector_frame_2)
-            e = type_map[self._type].transformed(T1)
-            if flip == 0:
-                T2 = Translation.from_vector(e.frame.xaxis*elem._source.height*ratio)
-            else:
-                T2 = Translation.from_vector(e.frame.xaxis*-elem._source.height*ratio)
-            e.transform(T2)
-            options.append(e)
-
-        # else:
-        #     raise ValueError('All element connectors closed.')
-
-        return options
-    """
