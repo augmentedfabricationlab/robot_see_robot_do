@@ -5,6 +5,7 @@ from __future__ import print_function
 import json
 import os
 import math
+import compas
 
 from copy import deepcopy
 from compas.geometry import Frame
