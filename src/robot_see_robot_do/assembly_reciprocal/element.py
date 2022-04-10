@@ -62,7 +62,8 @@ class Element(object):
     def __init__(self, frame):
         super(Element, self).__init__()
 
-        self.message = "Hello"
+        self.message = "dynamic_cylinder"
+        self.objecttype = "object"
         self.connector_frame_1 = None
         self.connector_frame_2 = None
         self.connector_1_state = True
