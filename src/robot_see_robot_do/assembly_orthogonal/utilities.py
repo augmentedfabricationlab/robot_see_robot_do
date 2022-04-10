@@ -110,8 +110,6 @@ class FromToJson(object):
                 #json.dump(self.data, fp) # old:
                 compas.json_dump(self.data, fp)
 
-
-
 class FromToPickle(object):
 
     __module__ = 'compas.datastructures._mixins'

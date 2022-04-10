@@ -12,6 +12,7 @@ from compas.geometry import Transformation, Translation, Rotation
 from compas.geometry import distance_point_point
 from compas.datastructures import Network, network, mesh_offset
 from compas_ghpython.artists import MeshArtist
+import compas
 
 import rhinoscriptsyntax as rs
 
@@ -602,19 +603,51 @@ class Assembly(FromToData, FromToJson):
 
         self.to_json(path)
 
-    def export_to_json_incon(self, path, is_built=True):
-        print("exporting")
-        building_plan = []
+    def export_to_json_incon(self, qr_code, path, is_built=True, pretty=True):
+        buildingplan = {"id":"iaac_plan",'name':"iaac_plan", "description":"iaac_plan", "building_steps":[]}
+        building_steps = []
 
-        for key, element in self.elements(data=True):
-            line = []
-            id = "starting_cylinder" + str(key)
-            t = element._type
-            is_tag = ""
-            line.append(t) #type
-            line.append(is_tag) #is_tag
-            line += element.get_pose_quaternion() #element pose
-            building_plan.append(line)
+        for key, element, data in self.elements(data=True):
+            x,y,z,w,qx,qy,qz = element.get_pose_quaternion()
+            line = {
+                "id":element.message,
+                'type':element.objecttype, 
+                "object_type":"cylinder_for_iaac_workshop.obj", 
+                "is_tag": False, 
+                "pos.x": x,
+                "pos.y": y,
+                "pos.z": z,
+                "quat.w": w,
+                "quat.x": qx,
+                "quat.y": qy,
+                "quat.z": qz,
+                "is_already_built": is_built,
+                "color_rgb": [1.0, 0.0, 0.0],
+                "build_instructions": []
+                }
+            building_steps.append(line)
 
-        print(building_plan)
-        self.to_json(path)
+        placeholder = {"type":"object",'object_type':"cylinder_for_iaac_workshop.obj", "is_tag": False, "is_already_built": False, "color_rgb": [1.0, 0.0, 0.0],"instances": 200,"build_instructions" : []}
+        building_steps.append(placeholder)
+        
+        for tag in qr_code:
+            w,qx,qy,qz = tag.quaternion
+            tags = {
+                "id" : "tag_",
+                "type": "tag",
+                "tag_id": 0,
+                "tag_size" : 0.096,
+                "pos.x" : tag.point.x,
+                "pos.y" : tag.point.y,
+                "pos.z" : tag.point.z,
+                "quat.w" : w,
+                "quat.x" : qx,
+                "quat.y" : qy,
+                "quat.z" : qz,
+                "is_already_built" : True,
+                "build_instructions" : []
+            }
+            building_steps.append(tags)
+
+        buildingplan['building_steps'] = building_steps
+        compas.json_dump(buildingplan, path, pretty)
