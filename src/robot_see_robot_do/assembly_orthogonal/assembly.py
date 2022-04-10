@@ -601,3 +601,20 @@ class Assembly(FromToData, FromToJson):
             self.network.node_attribute(key, "is_built", is_built)
 
         self.to_json(path)
+
+    def export_to_json_incon(self, path, is_built=True):
+        print("exporting")
+        building_plan = []
+
+        for key, element in self.elements(data=True):
+            line = []
+            id = "starting_cylinder" + str(key)
+            t = element._type
+            is_tag = ""
+            line.append(t) #type
+            line.append(is_tag) #is_tag
+            line += element.get_pose_quaternion() #element pose
+            building_plan.append(line)
+
+        print(building_plan)
+        self.to_json(path)
