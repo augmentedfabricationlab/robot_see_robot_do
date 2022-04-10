@@ -12,7 +12,6 @@ from compas.geometry import Transformation, Translation, Rotation
 from compas.geometry import distance_point_point
 from compas.datastructures import Network, network, mesh_offset
 from compas_ghpython.artists import MeshArtist
-import compas
 
 import rhinoscriptsyntax as rs
 
@@ -214,7 +213,7 @@ class Assembly(FromToData, FromToJson):
         if unit_index == 1:
             T = Translation.from_vector(new_elem.frame.yaxis*radius*-a*2.+ new_elem.frame.zaxis*-radius*a*2.)
         T_shift = Translation.from_vector(current_connector_frame.xaxis*shift_value)
-        new_elem.transform(T)
+        new_elem.transform(T*T_shift)
 
         #if self.collision_check(new_elem, tolerance = -0.001) == False:
         if True:
@@ -611,9 +610,9 @@ class Assembly(FromToData, FromToJson):
             x,y,z,w,qx,qy,qz = element.get_pose_quaternion()
             line = {
                 "id":element.message,
-                'type':element.objecttype, 
-                "object_type":"cylinder_for_iaac_workshop.obj", 
-                "is_tag": False, 
+                'type':element.objecttype,
+                "object_type":"cylinder_for_iaac_workshop.obj",
+                "is_tag": False,
                 "pos.x": x,
                 "pos.y": y,
                 "pos.z": z,
@@ -629,7 +628,7 @@ class Assembly(FromToData, FromToJson):
 
         placeholder = {"type":"object",'object_type':"cylinder_for_iaac_workshop.obj", "is_tag": False, "is_already_built": False, "color_rgb": [1.0, 0.0, 0.0],"instances": 200,"build_instructions" : []}
         building_steps.append(placeholder)
-        
+
         for tag in qr_code:
             w,qx,qy,qz = tag.quaternion
             tags = {
@@ -651,3 +650,4 @@ class Assembly(FromToData, FromToJson):
 
         buildingplan['building_steps'] = building_steps
         compas.json_dump(buildingplan, path, pretty)
+

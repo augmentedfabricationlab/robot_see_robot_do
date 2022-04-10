@@ -585,7 +585,7 @@ class Element(object):
             e2 = self.transformed(R2)
             T1 = Translation.from_vector(e1.frame.zaxis*radius*a*b*2.)
             T2 = Translation.from_vector(e2.frame.yaxis*radius*-a*2.+ e2.frame.zaxis*-radius*a*2.)
-            T_shift = Translation.from_vector(self.connector_frame_1.xaxis*shift_value)
+            T_shift = Translation.from_vector(self.connector_frame_1.xaxis*-shift_value)
             e1.transform(T1*T_shift)
             e2.transform(T2*T_shift)
             options.append(e1)
@@ -630,37 +630,3 @@ class Element(object):
             return options
         else:
             return []
-
-
-    """
-    def options_elements(self, elem_x, elem_y, flip, ratio):
-
-        options = []
-
-        #type_map = {'X': elem_x, 'Y': elem_y, 'Z': elem_x}
-
-        if self.connector_1_state == True:
-            T1 = Transformation.from_frame_to_frame(Frame.WorldXY(), self.connector_frame_1)
-            e = type_map[self._type].transformed(T1)
-            if flip == 0:
-                T2 = Translation.from_vector(e.frame.xaxis*elem._source.diameter*ratio)
-            else:
-                T2 = Translation.from_vector(e.frame.xaxis*-elem._source.diameter*ratio)
-            e.transform(T2)
-            options.append(e)
-
-        if self.connector_2_state == True:
-            T1 = Transformation.from_frame_to_frame(Frame.WorldXY(), self.connector_frame_2)
-            e = type_map[self._type].transformed(T1)
-            if flip == 0:
-                T2 = Translation.from_vector(e.frame.xaxis*elem._source.height*ratio)
-            else:
-                T2 = Translation.from_vector(e.frame.xaxis*-elem._source.height*ratio)
-            e.transform(T2)
-            options.append(e)
-
-        # else:
-        #     raise ValueError('All element connectors closed.')
-
-        return options
-    """
