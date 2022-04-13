@@ -63,7 +63,7 @@ Create a workspace directory:
 
     C:\Users\YOUR_USERNAME\workspace\projects
 
-Then open Github Desktop and clone the [Robot See Robot Do repository](https://github.com/augmentedfabricationlab/robot_see_robot_do) repository into you workspace folder. Then install the repo within your environment (in editable mode):
+Then open Github Desktop and clone the [Robot See Robot Do repository](https://github.com/augmentedfabricationlab/robot_see_robot_do) repository into your projects folder. Then install the repo within your environment (in editable mode):
 
     (rsrd) pip install -e your_filepath_to_robot_see_robot_do
     (rsrd) python -m compas_rhino.install -p robot_see_robot_do -v 7.0
