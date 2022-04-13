@@ -20,6 +20,8 @@ from .element import Element
 
 from .utilities import FromToData
 from .utilities import FromToJson
+from .utilities import element_to_INCON 
+from .utilities import tag_to_INCON
 
 __all__ = ['Assembly']
 
@@ -603,51 +605,23 @@ class Assembly(FromToData, FromToJson):
 
         self.to_json(path)
 
-    def export_to_json_incon(self, qr_code, path, is_built=True, pretty=True):
+    def export_to_json_incon(self, path, qr_code, starting_geometry=True, is_built=True, pretty=True):
         buildingplan = {"id":"iaac_plan",'name':"iaac_plan", "description":"iaac_plan", "building_steps":[]}
         building_steps = []
+        len = 0
 
         for key, element, data in self.elements(data=True):
-            x,y,z,w,qx,qy,qz = element.get_pose_quaternion()
-            line = {
-                "id":element.message,
-                'type':element.objecttype,
-                "object_type":"cylinder_for_iaac_workshop.obj",
-                "is_tag": False,
-                "pos.x": x,
-                "pos.y": y,
-                "pos.z": z,
-                "quat.w": w,
-                "quat.x": qx,
-                "quat.y": qy,
-                "quat.z": qz,
-                "is_already_built": is_built,
-                "color_rgb": [1.0, 0.0, 0.0],
-                "build_instructions": []
-                }
-            building_steps.append(line)
+            element_to_INCON(key, element, building_steps, True, "cylinder_for_iaac_workshop.obj")
+            len += 1 
+
+        if starting_geometry:
+            element_to_INCON(len, None, building_steps, True, "starting_material.obj")
 
         placeholder = {"type":"object",'object_type':"cylinder_for_iaac_workshop.obj", "is_tag": False, "is_already_built": False, "color_rgb": [1.0, 0.0, 0.0],"instances": 200,"build_instructions" : []}
         building_steps.append(placeholder)
 
-        for tag in qr_code:
-            w,qx,qy,qz = tag.quaternion
-            tags = {
-                "id" : "tag_",
-                "type": "tag",
-                "tag_id": 0,
-                "tag_size" : 0.096,
-                "pos.x" : tag.point.x,
-                "pos.y" : tag.point.y,
-                "pos.z" : tag.point.z,
-                "quat.w" : w,
-                "quat.x" : qx,
-                "quat.y" : qy,
-                "quat.z" : qz,
-                "is_already_built" : True,
-                "build_instructions" : []
-            }
-            building_steps.append(tags)
+        for key, tag in enumerate(qr_code):
+            tag_to_INCON(key, tag, building_steps)
 
         buildingplan['building_steps'] = building_steps
         compas.json_dump(buildingplan, path, pretty)

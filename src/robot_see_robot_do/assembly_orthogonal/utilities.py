@@ -156,6 +156,49 @@ def _serialize_to_data(obj):
         data=obj.to_data()
     )
 
+def element_to_INCON(key, element, building_steps, is_built,name):
+        if element != None:
+            x,y,z,w,qx,qy,qz = element.get_pose_quaternion()
+            type = element.objecttype
+        else:
+            x,y,z,w,qx,qy,qz = 0,0,0,1,0,0,0
+            type = "object"
+        line = {
+            "id":"dynamic_cylinder" + str(key),
+            'type':type,
+            "object_type":name,
+            "is_tag": False,
+            "pos.x": x,
+            "pos.y": y,
+            "pos.z": z,
+            "quat.w": w,
+            "quat.x": qx,
+            "quat.y": qy,
+            "quat.z": qz,
+            "is_already_built": is_built,
+            "color_rgb": [1.0, 0.0, 0.0],
+            "build_instructions": [],
+            }
+        building_steps.append(line)
+
+def tag_to_INCON(key, tag, building_steps):
+        w,qx,qy,qz = tag.quaternion
+        line = {
+                "id" : "tag_" + str(key),
+                "type": "tag",
+                "tag_id": key,
+                "tag_size" : 0.096,
+                "pos.x" : tag.point.x,
+                "pos.y" : tag.point.y,
+                "pos.z" : tag.point.z,
+                "quat.w" : w,
+                "quat.x" : qx,
+                "quat.y" : qy,
+                "quat.z" : qz,
+                "is_already_built" : True,
+                "build_instructions" : []
+            }
+        building_steps.append(line)
 
 def _deserialize_from_data(data):
     module, attr = data['dtype'].split('/')
