@@ -29,7 +29,7 @@ Execute the commands below in Anaconda Prompt:
     (base) conda activate rsrd
 
 #### Mac
-    (base) conda create -n learn compas_fab=0.22.0 python.app --yes
+    (base) conda create -n rsrd compas_fab=0.22.0 python.app --yes
     (base) conda activate rsrd
     
 
@@ -38,7 +38,7 @@ Execute the commands below in Anaconda Prompt:
     (rsrd) pip show compas_fab
 
     Name: compas-fab
-    Version: 0.XX.X
+    Version: 0.22.0
     Summary: Robotic fabrication package for the COMPAS Framework
     ...
 
