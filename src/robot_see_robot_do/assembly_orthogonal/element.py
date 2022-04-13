@@ -585,7 +585,7 @@ class Element(object):
             e2 = self.transformed(R2)
             T1 = Translation.from_vector(e1.frame.zaxis*radius*a*b*2.)
             T2 = Translation.from_vector(e2.frame.yaxis*radius*-a*2.+ e2.frame.zaxis*-radius*a*2.)
-            T_shift = Translation.from_vector(self.connector_frame_1.xaxis*-shift_value)
+            T_shift = Translation.from_vector(self.connector_frame_1.xaxis*shift_value)
             e1.transform(T1*T_shift)
             e2.transform(T2*T_shift)
             options.append(e1)

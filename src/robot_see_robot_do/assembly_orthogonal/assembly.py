@@ -179,8 +179,6 @@ class Assembly(FromToData, FromToJson):
         """Add an element to the assembly.
         """
         radius = self.globals['radius']
-        height = self.globals['height']
-        shift_value = self.globals['shift_value']
 
         N = self.network.number_of_nodes()
 
