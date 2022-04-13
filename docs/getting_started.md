@@ -61,7 +61,7 @@ Execute the commands below in Anaconda Prompt:
 
 Create a workspace directory:
 
-    C:\Users\YOUR_USERNAME\workspace
+    C:\Users\YOUR_USERNAME\workspace\projects
 
 Then open Github Desktop and clone the [Robot See Robot Do repository](https://github.com/augmentedfabricationlab/robot_see_robot_do) repository into you workspace folder. Then install the repo within your environment (in editable mode):
 
