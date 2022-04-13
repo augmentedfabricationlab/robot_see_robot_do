@@ -614,8 +614,9 @@ class Assembly(FromToData, FromToJson):
 
         if starting_geometry:
             element_to_INCON(len, None, building_steps, True, "starting_material.obj")
+            len += 1
 
-        placeholder = {"type":"object",'object_type':"cylinder_for_iaac_workshop.obj", "is_tag": False, "is_already_built": False, "color_rgb": [1.0, 0.0, 0.0],"instances": 200,"build_instructions" : []}
+        placeholder = {"type":"object",'object_type':"cylinder_for_iaac_workshop.obj", "id": "dynamic_cylinder", "is_tag": False, "is_already_built": False, "color_rgb": [1.0, 0.0, 0.0],"instances": 200,"build_instructions" : []}
         building_steps.append(placeholder)
 
         for key, tag in enumerate(qr_code):
