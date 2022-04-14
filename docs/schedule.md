@@ -31,19 +31,27 @@ title: Schedule
 #### Session 2 
 15:00-19:00
 * Introduction of RSRD workflow + code structure
+* Rope joints experimentation
 * Demo of RSRD workflow
+
 
 ### 20.4.
 #### Session 3
 10:00-14:00
-* Design Tool
-* Design Explorations --> Goal: Understanding the design space,
+* Design tool (ex1+ex2)
+* Design explorations with design tool
+* Robot planning tool (ex3+ex4)
+* Design explorations with robotic constraints
+* Scanning procedure (ex5)
+* Scanning explorations
+* RSRD workflow (ex6)
+* Demo of RSRD workflow
 
 #### Session 4
 15:00-19:00
-* Input Lecture Incon
-* Design Studies
-* Design Presentations
+* Input lecture Incon
+* Design studies
+* Design presentations
 
 ### 21.4.
 #### Session 5
@@ -59,8 +67,8 @@ title: Schedule
 #### Session 7
 10:00-14:00
 * Fabrication
-* Preparation Presentation
+* Preparation presentation
 
 #### Session 8
 15:00-19:00
-* Review and Reflection with external guests
+* Review and reflection with external guests
