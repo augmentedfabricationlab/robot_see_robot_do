@@ -8,7 +8,7 @@ import math
 import compas
 
 from copy import deepcopy
-from compas.geometry import Frame
+from compas.geometry import Frame, Vector
 from compas.geometry import Transformation, Translation, Rotation
 from compas.geometry import distance_point_point
 from compas.datastructures import Network, network, mesh_offset
@@ -173,12 +173,13 @@ class Assembly(FromToData, FromToJson):
         return key
 
 
-    def add_unit_element(self, current_key, shift_value=0, angle=0, placed_by='human', on_ground=False, unit_index=0, frame_id=None, frame_est=None):
+    def add_unit_element(self, current_key, flip='AA', angle1=0, angle2=0, placed_by='human', on_ground=False, unit_index=0, frame_id=None, frame_est=None):
         """Add an element to the assembly.
         """
         radius = self.globals['radius']
         height = self.globals['height']
-        shift_value = self.globals['shift_value']
+        rf_unit_radius = self.globals['rf_unit_radius']
+        rf_unit_offset = self.globals['rf_unit_offset']
 
         N = self.network.number_of_nodes()
 
@@ -187,18 +188,38 @@ class Assembly(FromToData, FromToJson):
         # Find the open connector of the current element
         if current_elem.connector_1_state:
             current_connector_frame = current_elem.connector_frame_1
+            c = -1
         else:
             current_connector_frame = current_elem.connector_frame_2
+            c = 1
+
+        if flip == 'AA':
+            a = b = 0
+        if flip == 'AB':
+            a = 0
+            b = 1*c
+        if flip == 'BA':
+            a = 1*c
+            b = 0
+        if flip == 'BB':
+            a = b = 1*c
+
+        new_elem = current_elem.copy()
 
         if placed_by == 'robot':
-            R1 = Rotation.from_axis_and_angle(current_connector_frame.zaxis, math.radians(120), current_connector_frame.point)
+            R1 = Rotation.from_axis_and_angle(current_connector_frame.zaxis, math.radians(angle1), current_connector_frame.point)
+            T1 = Translation.from_vector(-new_elem.frame.xaxis*a*((height-rf_unit_radius+rf_unit_offset)/2.))
         else:
-            R1 = Rotation.from_axis_and_angle(current_connector_frame.zaxis, math.radians(240), current_connector_frame.point)
+            R1 = Rotation.from_axis_and_angle(current_connector_frame.zaxis, math.radians(360-angle1), current_connector_frame.point)
+            T1 = Translation.from_vector(-new_elem.frame.xaxis*b*((height-rf_unit_radius+rf_unit_offset)/2.))
 
-        new_elem = current_elem.transformed(R1)
+        new_elem.transform(R1*T1)
 
-        # Define a desired rotation in reference to the build element
-        R2 = Rotation.from_axis_and_angle(current_elem.frame.xaxis, math.radians(angle), current_connector_frame.point)
+        # Define a desired rotation in reference to the built element
+        T_point = Translation.from_vector(current_elem.frame.xaxis)
+        new_point = current_elem.frame.point.transformed(T_point)
+        R2 = Rotation.from_axis_and_angle(current_elem.frame.xaxis, math.radians(angle2),new_point)
+
         new_elem.transform(R2)
 
         #if self.collision_check(new_elem, tolerance = -0.001) == False:
@@ -211,7 +232,13 @@ class Assembly(FromToData, FromToJson):
                 self.network.add_edge(N-1, N, edge_to='parent')
                 self.network.add_edge(current_key, N, edge_to='parent')
 
-            self.update_connectors_states(current_key, new_elem, unit_index)
+            self.update_connectors_states(current_key, flip, new_elem, unit_index)
+
+        if unit_index == 1:
+            if current_elem.connector_1_state:
+                current_elem.connector_1_state = False
+            else:
+                current_elem.connector_2_state = False
 
         return new_elem
 
@@ -423,7 +450,7 @@ class Assembly(FromToData, FromToJson):
 
         return collision
 
-    def close_unit(self, current_key, shift_value=0, angle=90, on_ground=False, added_frame_id=None, frame_est=None):
+    def close_unit(self, current_key, flip, angle1, angle2, on_ground=False, added_frame_id=None, frame_est=None):
         """Add a module to the assembly.
         """
 
@@ -433,12 +460,12 @@ class Assembly(FromToData, FromToJson):
             if i == 0:
                 placed_by = 'robot'
                 frame_id = None
-                my_new_elem = self.add_unit_element(current_key, shift_value=shift_value, angle=angle, placed_by=placed_by, on_ground=False, unit_index=i, frame_id=frame_id, frame_est=None)
+                my_new_elem = self.add_unit_element(current_key, flip=flip, angle1=angle1, angle2=angle2, placed_by=placed_by, on_ground=False, unit_index=i, frame_id=frame_id, frame_est=None)
                 keys_robot += list(self.network.nodes_where({'element': my_new_elem}))
             else:
                 placed_by = 'human'
                 frame_id = added_frame_id
-                my_new_elem = self.add_unit_element(current_key, shift_value=shift_value, angle=angle, placed_by=placed_by, on_ground=False, unit_index=i, frame_id=frame_id, frame_est=frame_est)
+                my_new_elem = self.add_unit_element(current_key, flip=flip, angle1=angle1, angle2=angle2, placed_by=placed_by, on_ground=False, unit_index=i, frame_id=frame_id, frame_est=frame_est)
                 keys_human = list((self.network.nodes_where({'element': my_new_elem})))
 
         keys_dict = {'keys_human': keys_human, 'keys_robot':keys_robot}
@@ -461,7 +488,7 @@ class Assembly(FromToData, FromToJson):
         return parent_key
 
 
-    def update_connectors_states(self, current_key, my_new_elem, unit_index):
+    def update_connectors_states(self, current_key, flip, my_new_elem, unit_index):
 
         key_index = self.network.key_index()
         current_elem = self.network.node[current_key]['element']
@@ -469,14 +496,32 @@ class Assembly(FromToData, FromToJson):
         previous_elem = self.network.node[keys[-2]]['element']
 
         if unit_index == 1:
-            if current_elem.connector_1_state:
-                previous_elem.connector_1_state = False
-                current_elem.connector_1_state = False
-                my_new_elem.connector_1_state = False
             if current_elem.connector_2_state:
-                previous_elem.connector_2_state = False
-                current_elem.connector_2_state = False
-                my_new_elem.connector_2_state = False
+                if flip == 'AA':
+                    previous_elem.connector_2_state = False
+                    my_new_elem.connector_2_state = False
+                if flip == 'AB':
+                    previous_elem.connector_2_state = False
+                    my_new_elem.connector_1_state = False
+                if flip == 'BA':
+                    previous_elem.connector_1_state = False
+                    my_new_elem.connector_2_state = False
+                if flip == 'BB':
+                    previous_elem.connector_1_state = False
+                    my_new_elem.connector_1_state = False
+            if current_elem.connector_1_state:
+                if flip == 'AA':
+                    previous_elem.connector_1_state = False
+                    my_new_elem.connector_1_state = False
+                if flip == 'AB':
+                    previous_elem.connector_1_state = False
+                    my_new_elem.connector_2_state = False
+                if flip == 'BA':
+                    previous_elem.connector_2_state = False
+                    my_new_elem.connector_1_state = False
+                if flip == 'BB':
+                    previous_elem.connector_2_state = False
+                    my_new_elem.connector_2_state = False
 
 
     def keys_within_radius(self, current_key):
