@@ -15,7 +15,6 @@ title: Getting Started
 
 * [COMPAS](https://compas-dev.github.io/)
 * [COMPAS FAB](https://gramaziokohler.github.io/compas_fab/latest/)
-* [Assembly Information Model](https://github.com/augmentedfabricationlab/assembly_information_model)
 * [UR Fabrication Control](https://github.com/augmentedfabricationlab/ur_fabrication_control)
 
 ### 1. Setting up the Anaconda environment with COMPAS

@@ -563,25 +563,47 @@ class Element(object):
             return []
 
 
-    def options_elements(self, angle):
+    def options_elements(self, flip, angle1, angle2):
 
         options = []
+        height = self._source.height
+        rf_unit_radius = 0.1
+        rf_unit_offset = 0.3
 
         if self.connector_1_state == True:
             current_connector = self.connector_frame_1
+            c = -1
         if self.connector_2_state == True:
             current_connector = self.connector_frame_2
+            c = 1
 
-        R1 = Rotation.from_axis_and_angle(current_connector.zaxis, math.radians(120), current_connector.point)
-        R2 = Rotation.from_axis_and_angle(current_connector.zaxis, math.radians(240), current_connector.point)
+        if flip == 'AA':
+            a = b = 0
+        if flip == 'AB':
+            a = 0
+            b = 1*c
+        if flip == 'BA':
+            a = 1*c
+            b = 0
+        if flip == 'BB':
+            a = b = 1*c
+
+        R1 = Rotation.from_axis_and_angle(current_connector.zaxis, math.radians(angle1), current_connector.point)
+        R2 = Rotation.from_axis_and_angle(current_connector.zaxis, math.radians(360-angle1), current_connector.point)
         e1 = self.transformed(R1)
         e2 = self.transformed(R2)
-        R3 = Rotation.from_axis_and_angle(self.frame.xaxis, math.radians(angle), current_connector.point)
-        e1.transform(R3)
-        e2.transform(R3)
+
+        T_point = Translation.from_vector(self.frame.xaxis)
+        new_point = self.frame.point.transformed(T_point)
+        R3 = Rotation.from_axis_and_angle(self.frame.xaxis, math.radians(angle2),new_point)
+
+        T1 = Translation.from_vector(-e1.frame.xaxis*a*((height-rf_unit_radius+rf_unit_offset)/2.))
+        T2 = Translation.from_vector(-e2.frame.xaxis*b*((height-rf_unit_radius+rf_unit_offset)/2.))
+
+        e1.transform(R3*T1)
+        e2.transform(R3*T2)
         options.append(e1)
         options.append(e2)
-
 
         return options
 
