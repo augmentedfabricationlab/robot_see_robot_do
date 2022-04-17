@@ -11,7 +11,7 @@ from copy import deepcopy
 from compas.geometry import Frame
 from compas.geometry import Transformation, Translation, Rotation
 from compas.geometry import distance_point_point
-from compas.datastructures import Network, network, mesh_offset
+from compas.datastructures import Network, network, mesh_offset, json_dump
 from compas_ghpython.artists import MeshArtist
 
 import rhinoscriptsyntax as rs
