@@ -11,7 +11,7 @@ from copy import deepcopy
 from compas.geometry import Frame
 from compas.geometry import Transformation, Translation, Rotation
 from compas.geometry import distance_point_point
-from compas.datastructures import Network, network, mesh_offset, json_dump
+from compas.datastructures import Network, network, mesh_offset 
 from compas_ghpython.artists import MeshArtist
 
 import rhinoscriptsyntax as rs
@@ -608,13 +608,13 @@ class Assembly(FromToData, FromToJson):
         building_steps = []
         len = 0
 
-        for key, element, data in self.elements(data=True):
-            element_to_INCON(key, element, building_steps, True, "cylinder_for_iaac_workshop.obj")
-            len += 1 
-
         if starting_geometry:
             element_to_INCON(len, None, building_steps, True, "starting_material.obj")
             len += 1
+
+        for key, element, data in self.elements(data=True):
+            element_to_INCON(key, element, building_steps, True, "cylinder_for_iaac_workshop.obj")
+            len += 1 
 
         placeholder = {"type":"object",'object_type':"cylinder_for_iaac_workshop.obj", "id": "dynamic_cylinder", "is_tag": False, "is_already_built": False, "color_rgb": [1.0, 0.0, 0.0],"instances": 200,"build_instructions" : []}
         building_steps.append(placeholder)
