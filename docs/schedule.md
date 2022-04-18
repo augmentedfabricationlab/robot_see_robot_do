@@ -5,18 +5,18 @@ title: Schedule
 
 ### Session Blocks
 
-| Date  | Time        | Session | Slides |
+| Date  | Time        | Session | Topic |
 |-------|-------------|---------|--------|
-| 19.4. | 10:00-14:00 | 1       |   (Slides)[https://docs.google.com/presentation/d/173XJSfnznUlNV_bmgpmIVUqVObpbmP8pvhWNbpxiZRg/edit?usp=sharing]     |
-|       | 15:00-19:00 | 2       |        |
-| 20.4. | 10:00-14:00 | 3       |        |
-|       | 15:00-19:00 | 4       |        |
-| 21.4. | 10:00-14:00 | 5       |        |
-|       | 15:00-19:00 | 6       |        |
-| 22.4. | 10:00-14:00 | 7       |        |
-|       | 15:00-19:00 | 8       |        |
-| 23.4. | 10:00-14:00 | 9       |        |
-|       | 15:00-19:00 | 10      |        |
+| 19.4. | 10:00-14:00 | 1       |  Welcome, introduction & getting started    |
+|       | 15:00-19:00 | 2       |  Introduction of RSRD workflow & demo     |
+| 20.4. | 10:00-14:00 | 3       |  In-depth explanation of RSRD worflow   |
+|       | 15:00-19:00 | 4       |  Design explorations & presentations     |
+| 21.4. | 10:00-14:00 | 5       |  Fabrication     |
+|       | 15:00-19:00 | 6       |  Fabrication     |
+| 22.4. | 10:00-14:00 | 7       |  Fabrication      |
+|       | 15:00-19:00 | 8       |  Fabrication      |
+| 23.4. | 10:00-14:00 | 9       |  Fabrication & preparation review presentation      |
+|       | 15:00-19:00 | 10      |  Review and reflection     |
 
 
 ### 19.4.
@@ -54,21 +54,21 @@ title: Schedule
 * Design presentations
 
 ### 21.4.
-#### Session 5
+#### Session 5 & 6
 10:00-19:00
 * Fabrication
 
 ### 22.4.
-#### Session 6
+#### Session 7 & 8
 10:00-19:00
 * Fabrication
 
 ### 23.4.
-#### Session 7
+#### Session 9
 10:00-14:00
 * Fabrication
 * Preparation presentation
 
-#### Session 8
+#### Session 10
 15:00-19:00
 * Review and reflection with external guests
