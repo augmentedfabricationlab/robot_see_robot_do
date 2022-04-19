@@ -647,7 +647,7 @@ class Assembly(FromToData, FromToJson):
         for key, element, data in self.elements(data=True):
             element_to_INCON("dynamic_cylinder", key, element, building_steps, True, "cylinder_for_iaac_workshop.obj") 
 
-        placeholder = {"type":"object",'object_type':"cylinder_for_iaac_workshop.obj", "id": "dynamic_cylinder", "is_tag": False, "is_already_built": False, "color_rgb": [1.0, 0.0, 0.0],"instances": 200,"build_instructions" : []}
+        placeholder = {"type":"object",'object_type':"cylinder_for_iaac_workshop_1m.obj", "id": "dynamic_cylinder", "is_tag": False, "is_already_built": False, "color_rgb": [1.0, 0.0, 0.0],"instances": 200,"build_instructions" : []}
         building_steps.append(placeholder)
 
         for key, tag in enumerate(qr_code):
