@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Design Principles
+title: Design Tool and Assembly Information Model
 ---
 
-#### Design Principles
+#### Design Tool and Assembly Information Model
