@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+# Rhino temp files
+*.rhl
+*.3dmbak
+
 # Distribution / packaging
 .Python
 env/
