@@ -1,0 +1,401 @@
+{
+    "building_steps": [
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "starting element0",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "starting_material.obj",
+            "pos.x": 0,
+            "pos.y": 0,
+            "pos.z": 0,
+            "quat.w": 1,
+            "quat.x": 0,
+            "quat.y": 0,
+            "quat.z": 0,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder0",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop.obj",
+            "pos.x": 0.60327540350589337,
+            "pos.y": -0.057844304097625115,
+            "pos.z": 0.31259676794433205,
+            "quat.w": 0.82978858725378646,
+            "quat.x": 0.38644073686101638,
+            "quat.y": -0.38385562464298473,
+            "quat.z": -0.12152907795101459,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder1",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop.obj",
+            "pos.x": 0.9450056121207705,
+            "pos.y": -0.45591448650439359,
+            "pos.z": 0.2650510594242711,
+            "quat.w": 0.47736669694098854,
+            "quat.x": -0.04652033695085718,
+            "quat.y": -0.53714733486351618,
+            "quat.z": 0.69385130651361526,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder2",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop.obj",
+            "pos.x": 0.85849655464276498,
+            "pos.y": -0.11632993401578599,
+            "pos.z": 0.34461816347819202,
+            "quat.w": -0.34533827417548996,
+            "quat.x": 0.29816532678698171,
+            "quat.y": 0.11672182618972853,
+            "quat.z": 0.88216491065018066,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder3",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 0.97048906460705198,
+            "pos.y": -0.211666226175978,
+            "pos.z": 0.67465426560765496,
+            "quat.w": 0.73562229139707047,
+            "quat.x": 0.40394590610011882,
+            "quat.y": -0.35558492458879537,
+            "quat.z": 0.41139629404001499,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder4",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 1.0173227106683935,
+            "pos.y": 0.060735252317985378,
+            "pos.z": 1.1231005211510654,
+            "quat.w": 0.76512641726143882,
+            "quat.x": 0.42764454678926639,
+            "quat.y": 0.12462278093347731,
+            "quat.z": -0.46494179171427913,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder5",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 1.46640592614638,
+            "pos.y": -0.14428202362824499,
+            "pos.z": 0.90131989276290003,
+            "quat.w": -0.011799630383910992,
+            "quat.x": -0.094424246155830921,
+            "quat.y": 0.45187848471176462,
+            "quat.z": 0.88698966483003938,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder6",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 0.80769355397707898,
+            "pos.y": 0.010093542537066236,
+            "pos.z": 1.1839059740081659,
+            "quat.w": 0.81998598277114632,
+            "quat.x": 0.22911275675249551,
+            "quat.y": -0.098610446117047348,
+            "quat.z": 0.51517600164284261,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder7",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 1.1652740306932097,
+            "pos.y": 0.30836353710181608,
+            "pos.z": 1.3543382702820297,
+            "quat.w": 0.99828661853184752,
+            "quat.x": 0.058503433586026866,
+            "quat.y": 0.00046149726703594002,
+            "quat.z": 0.00098109080505627251,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder8",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 0.38188188559883174,
+            "pos.y": -0.29132138324309964,
+            "pos.z": 1.2569365538351718,
+            "quat.w": -0.045024961037598052,
+            "quat.x": 0.24451865515896909,
+            "quat.y": -0.44038242241136177,
+            "quat.z": 0.86269734101474593,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder9",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 0.53797370820667489,
+            "pos.y": -0.19192592174874917,
+            "pos.z": 1.3832779736114686,
+            "quat.w": 0.73719856029329767,
+            "quat.x": 0.2512286350416944,
+            "quat.y": 0.5239194837825959,
+            "quat.z": -0.34486349495061741,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder10",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 1.8934835398842429,
+            "pos.y": -0.43694445654836589,
+            "pos.z": 0.99854855212445992,
+            "quat.w": 0.87981278973347909,
+            "quat.x": -0.06654676339755998,
+            "quat.y": -0.026153510263797575,
+            "quat.z": -0.46991166957587177,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder11",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 1.9459045690295367,
+            "pos.y": 0.072043880968206353,
+            "pos.z": 0.87331713443919101,
+            "quat.w": 0.83642976993008145,
+            "quat.x": -0.15124081945837128,
+            "quat.y": 0.095105035018208467,
+            "quat.z": 0.5181375172851862,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder12",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 2.2661171145474706,
+            "pos.y": 0.45985098777833622,
+            "pos.z": 0.84468379841987817,
+            "quat.w": 0.86802827546055294,
+            "quat.x": 0.20855274239711954,
+            "quat.y": -0.31053320639930987,
+            "quat.z": 0.32649930223965695,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder13",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 2.2350856203738014,
+            "pos.y": 0.24783733359954274,
+            "pos.z": 0.46962048897953124,
+            "quat.w": 0.024135835880603071,
+            "quat.x": 0.52380786234070942,
+            "quat.y": -0.032533078439273284,
+            "quat.z": 0.85087271879151538,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder14",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 2.5867271227804682,
+            "pos.y": 0.78967659389652922,
+            "pos.z": 1.0944893804462166,
+            "quat.w": 0.5979161065214903,
+            "quat.x": 0.28731582237518255,
+            "quat.y": -0.33427431954725578,
+            "quat.z": -0.66948235754668983,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder15",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 2.6361984343738816,
+            "pos.y": 0.33437914515929762,
+            "pos.z": 1.1979494681718768,
+            "quat.w": 0.28210205422855528,
+            "quat.x": -0.30084072731272693,
+            "quat.y": -0.093264501139742065,
+            "quat.z": 0.90620914838525757,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder16",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 2.8788195286713858,
+            "pos.y": 1.1643155272506405,
+            "pos.z": 1.3221463505484921,
+            "quat.w": 0.90536074122349752,
+            "quat.x": -0.20844829489066927,
+            "quat.y": -0.34133112256108966,
+            "quat.z": 0.14270354368269267,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder17",
+            "is_already_built": true,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m.obj",
+            "pos.x": 2.7730820155328502,
+            "pos.y": 0.97659960005801771,
+            "pos.z": 1.383697777788613,
+            "quat.w": 0.30744463470200734,
+            "quat.x": -0.49576411726585184,
+            "quat.y": -0.0070568030138341512,
+            "quat.z": 0.81218590122938228,
+            "type": "object"
+        },
+        {
+            "build_instructions": [],
+            "color_rgb": [
+                1.0,
+                0.0,
+                0.0
+            ],
+            "id": "dynamic_cylinder",
+            "instances": 200,
+            "is_already_built": false,
+            "is_tag": false,
+            "object_type": "cylinder_for_iaac_workshop_1m_1m.obj",
+            "type": "object"
+        }
+    ],
+    "description": "iaac_plan",
+    "id": "iaac_plan",
+    "name": "iaac_plan"
+}
