@@ -1,0 +1,88 @@
+{
+  "id" : "iaac_plan",
+  "name" : "iaac_plan",
+  "description" : "iaac_plan",
+  "building_steps" : [
+    {
+      "id" : "starting_cylinder_1",
+      "type": "object",
+      "object_type" : "cylinder_for_iaac_workshop.obj",
+      "is_tag" : false,
+      "pos.x" : -0.20000000000000001,
+      "pos.y" : 0.029999999999999999,
+      "pos.z" : 0.0,
+      "quat.w" : 6.0894891604173028e-17,
+      "quat.x" : 0.9945218953682734,
+      "quat.y" : -6.4003110136428692e-18,
+      "quat.z" : 0.10452846326765347,
+      "is_already_built" : true,
+      "color_rgb": [
+        1.0, 0.0, 0.0
+      ],
+      "build_instructions" : []
+    },
+	{
+      "id" : "starting_cylinder_2",
+      "type": "object",
+      "object_type" : "cylinder_for_iaac_workshop.obj",
+      "is_tag" : false,
+      "pos.x" : 0.074019237886466804,
+      "pos.y" : -0.18820508075688774,
+      "pos.z" : 0.0,
+      "quat.w" : -0.090524304608336423,
+      "quat.x" : 0.49726094768413681,
+      "quat.y" : 0.8612812260087741,
+      "quat.z" : 0.052264231633826805,
+      "is_already_built" : true,
+      "color_rgb": [
+        1.0, 0.0, 0.0
+      ],
+      "build_instructions" : []
+    },
+	{
+      "id" : "starting_cylinder_3",
+      "type": "object",
+      "object_type" : "cylinder_for_iaac_workshop.obj",
+      "is_tag" : false,
+      "pos.x" : 0.12598076211353323,
+      "pos.y" : 0.15820508075688766,
+      "pos.z" : 0.0,
+      "quat.w" : -0.090524304608336423,
+      "quat.x" : -0.49726094768413642,
+      "quat.y" : 0.86128122600877433,
+      "quat.z" : -0.052264231633826659,
+      "is_already_built" : true,
+      "color_rgb": [
+        1.0, 0.0, 0.0
+      ],
+      "build_instructions" : []
+    },
+    {
+      "id" : "dynamic_cylinder",
+      "type": "object",
+      "object_type" : "cylinder_for_iaac_workshop.obj",
+      "is_tag" : false,
+      "is_already_built" : false,
+      "color_rgb": [
+        1.0, 0.0, 0.0
+      ],
+	  "instances": 200,
+      "build_instructions" : []
+    },
+    {
+      "id" : "tag_",
+      "type": "tag",
+      "tag_id": 9,
+      "tag_size" : 0.0265,
+      "pos.x" : 0.5,
+      "pos.y" : 0.5,
+      "pos.z" : 0.0,
+      "quat.w" : 1.0,
+      "quat.x" : 0.0,
+      "quat.y" : 0.0,
+      "quat.z" : 0.0,
+      "is_already_built" : true,
+      "build_instructions" : []
+    }
+  ]
+}

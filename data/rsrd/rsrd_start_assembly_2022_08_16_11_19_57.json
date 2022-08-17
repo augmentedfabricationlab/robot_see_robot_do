@@ -1,0 +1,131 @@
+{
+    "building_steps": [
+        {
+            "build_instructions": [], 
+            "color_rgb": [
+                1.0, 
+                0.0, 
+                0.0
+            ], 
+            "id": "starting element0", 
+            "is_already_built": true, 
+            "is_tag": false, 
+            "object_type": "starting_material.obj", 
+            "pos.x": 0, 
+            "pos.y": 0, 
+            "pos.z": 0, 
+            "quat.w": 1, 
+            "quat.x": 0, 
+            "quat.y": 0, 
+            "quat.z": 0, 
+            "type": "object"
+        }, 
+        {
+            "build_instructions": [], 
+            "color_rgb": [
+                1.0, 
+                0.0, 
+                0.0
+            ], 
+            "id": "dynamic_cylinder0", 
+            "is_already_built": true, 
+            "is_tag": false, 
+            "object_type": "cylinder_for_iaac_workshop.obj", 
+            "pos.x": 1.5866556896584425, 
+            "pos.y": -2.0126388627333776, 
+            "pos.z": 0.3361966101922978, 
+            "quat.w": 0.6726831721288693, 
+            "quat.x": 0.54468178074280338, 
+            "quat.y": 0.0018279503794988378, 
+            "quat.z": 0.50081510186784572, 
+            "type": "object"
+        }, 
+        {
+            "build_instructions": [], 
+            "color_rgb": [
+                1.0, 
+                0.0, 
+                0.0
+            ], 
+            "id": "dynamic_cylinder1", 
+            "is_already_built": true, 
+            "is_tag": false, 
+            "object_type": "cylinder_for_iaac_workshop.obj", 
+            "pos.x": 1.9847258720652114, 
+            "pos.y": -1.6709086541185012, 
+            "pos.z": 0.28865090167223589, 
+            "quat.w": -0.15307773545132558, 
+            "quat.x": 0.34692567725723966, 
+            "quat.y": -0.41271536869930753, 
+            "quat.z": 0.82817619249051966, 
+            "type": "object"
+        }, 
+        {
+            "build_instructions": [], 
+            "color_rgb": [
+                1.0, 
+                0.0, 
+                0.0
+            ], 
+            "id": "dynamic_cylinder2", 
+            "is_already_built": true, 
+            "is_tag": false, 
+            "object_type": "cylinder_for_iaac_workshop.obj", 
+            "pos.x": 1.645141319576604, 
+            "pos.y": -1.7574177115965066, 
+            "pos.z": 0.36821800572615748, 
+            "quat.w": 0.12829992967454393, 
+            "quat.x": 0.86797582591831501, 
+            "quat.y": -0.37959375497282061, 
+            "quat.z": 0.29336951929701277, 
+            "type": "object"
+        }, 
+        {
+            "build_instructions": [], 
+            "color_rgb": [
+                1.0, 
+                0.0, 
+                0.0
+            ], 
+            "id": "dynamic_cylinder", 
+            "instances": 200, 
+            "is_already_built": false, 
+            "is_tag": false, 
+            "object_type": "cylinder_for_iaac_workshop_1m.obj", 
+            "type": "object"
+        }, 
+        {
+            "build_instructions": [], 
+            "id": "tag_0", 
+            "is_already_built": true, 
+            "pos.x": 1.5207983820499902, 
+            "pos.y": -2.373164703114039, 
+            "pos.z": 0.010000000000000018, 
+            "quat.w": 1.0, 
+            "quat.x": 0.0, 
+            "quat.y": 0.0, 
+            "quat.z": 0.0, 
+            "tag_id": 0, 
+            "tag_size": 0.096000000000000002, 
+            "type": "tag"
+        }, 
+        {
+            "build_instructions": [], 
+            "id": "tag_1", 
+            "is_already_built": true, 
+            "pos.x": 2.220798382049991, 
+            "pos.y": -1.9731647031140387, 
+            "pos.z": 0.010000000000000018, 
+            "quat.w": 1.0, 
+            "quat.x": 0.0, 
+            "quat.y": 0.0, 
+            "quat.z": 0.0, 
+            "tag_id": 1, 
+            "tag_size": 0.096000000000000002, 
+            "type": "tag"
+        }
+    ], 
+    "description": "iaac_plan", 
+    "id": "iaac_plan", 
+    "name": "iaac_plan"
+}
